@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: '123456', resave: true, saveUninitialized: true})); // ye old 123456, unbreakable
+app.use(session({secret: '123456', resave: true, saveUninitialized: true})); // ye old '123456', unbreakable
 
 // Use your routes child. ej:
 // app.use('/', router1);
