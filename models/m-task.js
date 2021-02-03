@@ -14,8 +14,8 @@ class Task {
     }
 
     async save(userID) {
-        let user = await query('users','insert',this);
-        return user;
+        let pushTask = await query('users','update',{ "_id": new ObjectId(userID) }, { $push: { "tasks": this }});
+        return pushTask;
     }
 }
 

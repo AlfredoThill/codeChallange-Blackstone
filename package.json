@@ -7,7 +7,7 @@
   },
   "author": "Alfredo Thill",
   "engiene": {
-    "node": "12.X"
+    "node": "14.X"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -19,7 +19,7 @@
     "g": "^2.0.1",
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
-    "mongodb": "^3.5.3",
+    "mongodb": "^3.6.4",
     "morgan": "~1.9.1",
     "nodemailer": "^6.4.3",
     "nodemon": "^2.0.2",

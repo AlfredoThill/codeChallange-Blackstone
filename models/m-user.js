@@ -6,7 +6,7 @@ const ObjectId = mongodb.ObjectId;
 //   on node. Here I wrote what I think could be an user model, dunno if I'm actully gonna use on the
 //   controllers. Knowing MVC mongoose makes more sense, the created schema could be the model and the
 //   mongoose driver comes with its own predefined methods saving some time. I ve explored mongoose but 
-//   i haven't really used it in a proyect yet. So, no moongose will be used but I'm more than willing to learn.
+//   I haven't really used it in a proyect yet. So, no moongose will be used but I'm more than willing to learn.
 class User {
   constructor(id, username, email, password, tasks, verified, expires) {
     this._id = id ? new ObjectId(id) : null;
