@@ -40,7 +40,6 @@ let send = async function sendMail(mail,kind,params) {
     await transporter.sendMail(mailOptions);
     }
   catch (e) {
-    // Dont judge for this non-catches... =)
     console.log('Send Email failed: '+ e)
   }   
 }
