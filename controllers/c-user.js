@@ -5,7 +5,7 @@ const signUpValidation = require('../utility/validators/signUpvalidation');
 const sendEmail = require('../utility/mailer');
 const ObjectId = require('mongodb').ObjectID;
 // Requiring the model, dunno if im gonna use it yet
-const user = require('../models/m-user');
+const User = require('../models/m-user');
 
 // # I'll be using this to check if the user is logged-in
 exports.checkStatus = (req, res, next) => {
