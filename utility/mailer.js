@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const templates = require('./templates');
+const templates = require('./templating/email');
 
 // Setting DB credentials as env variables, for this app we are using
 // a collection and a single user. If we are deploying on Heroku we
@@ -8,7 +8,7 @@ require('dotenv').config();
 const mail_user = process.env.MAILER_USER;
 const mail_pwd = process.env.MAILER_PASS;
 
-// # This helper is used to send mails, had gmail account configured for testing
+// # This helper is used to send mails, had a gmail account configured for testing
 //   on another proyect. I'll be using it instead of mail trap so you can really get
 //   get some mails.
 let send = async function sendMail(mail,kind,params) {
