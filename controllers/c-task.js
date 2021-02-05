@@ -6,7 +6,7 @@ const ObjectId = require('mongodb').ObjectID;
 const Task = require('../models/m-task');
 
 // # ajax GET all the taks related to an user, 
-exports.fetchTasks = (req, res, next) => {
+exports.fetchTasks = async (req, res, next) => {
     try {
         const userID = req.session.userID;
         const user = await query('user','find',{ '_id': new ObjectId(userID)});
@@ -19,7 +19,7 @@ exports.fetchTasks = (req, res, next) => {
 };
 
 // # ajax POST, create a new task related to the user
-exports.createTask = (req, res, next) => {
+exports.createTask = async (req, res, next) => {
     // Keep conection open since route implies several queries 
     const client = await invokeClient(); 
     const collection = client.db('codeChallange').collection('users');  
@@ -55,7 +55,7 @@ exports.createTask = (req, res, next) => {
 };
 
 // # ajax PUT, update task
-exports.updateTask = (req, res, next) => {
+exports.updateTask = async (req, res, next) => {
     // Keep conection open since route implies several queries 
     const client = await invokeClient(f_uri); 
     const collection = client.db('codeChallange').collection('users');  
@@ -92,7 +92,7 @@ exports.updateTask = (req, res, next) => {
 };
 
 // # ajax PUT, destroy task ==> update user
-exports.destroyTasks = (req, res, next) => {
+exports.destroyTask = async (req, res, next) => {
    // Keep conection open since route implies several queries 
    const client = await invokeClient(f_uri); 
    const collection = client.db('codeChallange').collection('users');  

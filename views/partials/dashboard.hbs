@@ -1,0 +1,117 @@
+<div id="myModal" class="modal" style='display: none'>
+  <!-- Modal login -->
+  <div class="modal-content" id='login-template'>
+  <a name='close-modal' class="close">&times;</a>  
+    <div class='column' id='login-content'>
+      <form class='column' id='login-form'>
+        <h2 id='modal-title'>Login</h2>
+        <label for="login-mail">Email</label>
+        <input type="email" id="login-mail" name="login-mail" required>
+        <label for="login-pwd">Password:</label>
+        <input type="password" id="login-pwd" name="login-pwd" required>
+        <div class="alertForm" style="display: none"><span class="closebtn" onclick="this.parentElement.style.display= 'none';">&times;</span><span name='modal-alert'></span></div>
+        <input type="submit" value="Submit" id='login-submit'>
+      </form>
+      <div class='modal-message'>Don't have an account yet? <span id='show-signin'>Sign in!</span></div>
+      <div class='modal-message'>Hit by a pixie arrow? <span id='reset-password'>Reset Password</span></div>
+    </div>
+    <div class='column' id='signin-content' style='display: none'>
+      <form class='column' id='signin-form'>
+        <h2 id='modal-title'>Sign IN</h2>
+        <label for="signin-name">Name</label>
+        <input type="text" id="signin-name" name="signin-name" required>
+        <label for="signin-mail">Email</label>
+        <input type="email" id="signin-mail" name="signin-mail" required>
+        <label for="signin-pwd">Password:</label>
+        <input type="password" id="signin-pwd" name="signin-pwd" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.repeatpwd.pattern = this.value;" required>
+        <label for="repeat-pwd">Repeat Password:</label>
+        <input type="password" id="repeatpwd" name="repeatpwd" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" required>
+        <div class="alertForm" style="display: none"><span class="closebtn" onclick="this.parentElement.style.display= 'none';">&times;</span><span name='modal-alert'></span></div>
+        <input type="submit" value="Submit" id='signin-submit'>
+      </form>
+      <div class='modal-message'>Mail is needed for account verification.</div>
+    </div>
+    <div class='column' id='forgot-content' style='display: none'>
+      <form class='column' id='reset-form'>
+        <h2 id='modal-title'>Reset Password</h2>
+        <label for="reset-mail">Email</label>
+        <input type="email" id="reset-mail" name="reset-mail" required>
+        <div class="alertForm" style="display: none"><span class="closebtn" onclick="this.parentElement.style.display= 'none';">&times;</span><span name='modal-alert'></span></div>
+        <input type="submit" value="Submit" id='reset-submit'>
+      </form>
+      <div class='modal-message'>You 'll recive a mail with instructions.</div>
+    </div>
+    <div class='column' name='await-msg' style='display: none'>
+        <h2 id='modal-title'><span name='msg-title'></span></h2>
+        <div class='column'>
+            <hr style='margin: 0px -10px 0px -10px;'>
+            <p><span name='msg-content'></span></p>
+        </div>
+      </div>      
+  </div>
+  {{!-- Modal logged and msg --}}
+  <div class="modal-content" id='logged-template' style='display: none'>
+  <a name='close-modal' class="close">&times;</a>  
+      <div class='column' id='modal-welcome' style='display: none'>
+        <h2 id='modal-title'>Welcome!</h2>
+        <div class='column'>
+            <hr style='margin: 0px -10px 0px -10px;'>
+            <p>Hi <span name='modal-user-name'></span>, your are now able to post your character builds and participate in the forum. Have a nice one!</p>
+            <a class='form-var-route' id='acknowledge-login'>Ok, let do this!</a>
+        </div>
+      </div>
+      <div class='column' id='modal-dashboard' style='display: none'>
+        <h2 id='modal-title'><span name='modal-user-name'></span></h2>
+        <div class='column'>
+            <hr style='margin: 0px -10px 0px -10px;'>
+            <p>Here you can logout, change your password and there will be a dashboard, soon, maybe (???).</p>
+            <a class='form-var-route' id='show-change-pwd'>Change Password</a>
+            <a href="/users/out" class='form-var-route'>Logout</a>
+        </div>
+      </div>
+      <div class='column' id='change-pwd-modal' style='display: none'>
+        <form class='column' id='change-pwd-form'>
+          <h2 id='modal-title'>Change Password</h2>
+          <label for="old-pwd">Old Password:</label>
+          <input type="password" id="old-pwd" name="old-pwd" required>
+          <label for="new-pwd">Password:</label>
+          <input type="password" id="new-pwd" name="new-pwd" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.repeatnewpwd.pattern = this.value;" required>
+          <label for="repeatnewpwd">Repeat Password:</label>
+          <input type="password" id="repeatnewpwd" name="repeatnewpwd" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" required>
+          <div class="alertForm" style="display: none"><span class="closebtn" onclick="this.parentElement.style.display= 'none';">&times;</span><span name='modal-alert'></span></div>
+          <input type="submit" value="Submit" id='change-pwd-submit'>
+        </form>
+        <div class='modal-message'>Password will change on submit!</div>
+      </div>  
+      <div class='column' id='modal-msg' style='display: none'>
+        <h2 id='modal-title'><span id='msg-title'></span></h2>
+        <div class='column'>
+            <hr style='margin: 0px -10px 0px -10px;'>
+            <p><span id='msg-content'></span></p>
+        </div>
+      </div>
+      <div class='column' id='modal-error' style='display: none'>
+        <h2 id='modal-title'>Natural 1, critical failure!</span></h2>
+        <div class='column'>
+            <hr style='margin: 0px -10px 0px -10px;'>
+            <p>Sorry, there's been some kind of error. If the error persists please send a report.</p>
+            <div class='columm' id='error-container'>
+              <span id='error-msg'></span>
+              <span id='error-status'></span>
+              <pre id='error-stack'></pre>
+            </div>
+            <a class='form-var-route'>Send Report</a>
+            <a class='form-var-route'>Try again</a>
+        </div>
+      </div>
+      <div class='column' id='modal-delete-warning' style='display: none'>
+        <h2 id='modal-title'><span id='warning-title'></span></h2>
+        <div class='column'>
+            <hr style='margin: 0px -10px 0px -10px;'>
+            <p><span id='warning-content'></span></p>
+            <a class='form-var-route' id='confirm-delete'>Do it, do it!</a>
+            <a class='form-var-route' id='cancel-delete'>Mmm... Nevermind.</a>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+h2 {
+    font-size: 30px;
+    font-weight: bolder;
+    font-style: italic;
+    padding: 10px;
+    text-align: center;
+}
+
+/* ------------- For image grid, just trying to show off with flexbox... ------------- */
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 5px;
+    }
+        .flex-column {
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 300px;
+            /* padding: 10px; */
+            margin: 5px;
+        }
+            .flex-item {
+                display: flex;
+                flex: 1 1 calc(200px + 100 * ((100vw - 320px)/ 1200));
+                padding: 5px;
+                margin: 5px;
+                border-radius: 10px;
+                align-items: flex-end;
+            }  
+            .background-img {
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }      
+                .one { background-image: url(../img/task1.jpg)}
+                .two { background-image: url(../img/task2.jpg)}
+                .three { background-image: url(../img/task3.png)}
+                .four { background-image: url(../img/task4.png)}
+                .five { background-image: url(../img/task5.jpg)}
+            .title {
+                color:aliceblue;
+                text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+                font-size: 30px;
+            }
+            .sub-title {
+                font-size: 20px;
+                opacity: 0.5;
+            }    

@@ -25,7 +25,7 @@ class User {
 
   async findByEmail(userEmail) {
     let user = await query('users','find',{ 'email': userEmail });
-    return user;
+    return user[0];
   }
 }
 

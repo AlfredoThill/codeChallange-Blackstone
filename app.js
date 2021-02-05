@@ -8,8 +8,10 @@ const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const session = require('express-session');
 
-// Require your routers son! ej:
-// const router1 = require('./routes/1');
+// req routers
+const mainRouter = require('./routes/r-main');
+const userRouter = require('./routes/r-user');
+const taskRouter = require('./routes/r-task');
 
 const app = express();
 
@@ -18,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,8 +28,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: '123456', resave: true, saveUninitialized: true})); // ye old '123456', unbreakable
 
-// Use your routes child. ej:
-// app.use('/', router1);
+// use routers
+app.use('/', mainRouter);
+app.use('/user', userRouter);
+app.use('/task', taskRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -31,7 +31,7 @@ exports.checkStatus = (req, res, next) => {
 };
 
 // # Simple login POST
-exports.login = (req, res, next) => {
+exports.login = async (req, res, next) => {
     const mail = req.body['login-mail'];
     const pwd = encrypt(req.body['login-pwd']); 
     let find = await query('users','find',{ 'isVerified': true, 'email': mail , 'password': pwd });
@@ -65,7 +65,7 @@ exports.out = (req, res, next) => {
 };
 
 // # Sign-in. Validates input, on success saves entry and sends confirmation-email
-exports.sign = (req, res, next) => {
+exports.signIn = async (req, res, next) => {
     const name = req.body['signin-name'];
     const mail = req.body['signin-mail'];
     const pwd = req.body['signin-pwd']; 
@@ -105,7 +105,7 @@ exports.sign = (req, res, next) => {
 };
 
 // # After 'sign-in'the user must confirm it's account or it'll be deleted (by scheduled procedure in mongo)
-exports.confirmAccount = (req, res, next) => {
+exports.confirmAccount = async (req, res, next) => {
     // Just 'verify' the account
     let id = req.query.id;
     let hash = req.query.token;
@@ -119,7 +119,7 @@ exports.confirmAccount = (req, res, next) => {
 };
 
 // # Reset password functionality pointing to the user's email
-exports.resetPwd = (req, res, next) => {
+exports.resetPwd = async (req, res, next) => {
     const mail = req.body['reset-mail'];
     let result = {};
     let check = await query('users','find',{ 'isVerified': true, 'email': mail });
@@ -141,7 +141,7 @@ exports.resetPwd = (req, res, next) => {
 };
 
 // # After requesting a password reset the user still has to validate it on it's email
-exports.confirmReset = (req, res, next) => {
+exports.confirmReset = async (req, res, next) => {
     let id = req.query.id;
     let hash = req.query.token;
     try {
@@ -158,7 +158,7 @@ exports.confirmReset = (req, res, next) => {
 };
 
 // # Change password feature
-exports.pwdChange = (req, res, next) => {
+exports.pwdChange = async (req, res, next) => {
     const userID = req.session.userID;
     const oldPWD = encrypt(req.body['old-pwd']);
     const newPWD = encrypt(req.body['new-pwd']);

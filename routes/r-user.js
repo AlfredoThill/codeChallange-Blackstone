@@ -2,14 +2,14 @@ const express = require('express');
 const userController = require('../controllers/c-user');
 const router = express.Router();
 
-router.get('/user/checkStatus', userController.checkStatus);
-router.post('/user/login', userController.login);
-router.post('/user/sign', userController.signIn);
-router.get('/user/out', userController.out);
-router.get('/user/confirm', userController.confirmAccount);
-router.post('/user/reset-pwd', userController.resetPwd);
-router.get('/user/confirm-reset', userController.confirmReset);
-router.put('/user/pwd-change', userController.pwdChange);
+router.get('/checkStatus', userController.checkStatus);
+router.post('/login', userController.login);
+router.post('/sign', userController.signIn);
+router.get('/out', userController.out);
+router.get('/confirm', userController.confirmAccount);
+router.post('/reset-pwd', userController.resetPwd);
+router.get('/confirm-reset', userController.confirmReset);
+router.put('/pwd-change', userController.pwdChange);
 
 
 module.exports = router;
