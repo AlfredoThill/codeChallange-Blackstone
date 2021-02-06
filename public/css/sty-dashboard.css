@@ -1,0 +1,143 @@
+/* ----------------------- Modal, takes the whole viewport ----------------------- */
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 50px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+    /* modal blocks */
+    .modal hr {
+        border: 1px solid black;
+        width: 100%;
+        opacity: 0.2;
+    }
+    .modal p {
+        text-align: justify;
+        font-size: 20px;
+        padding: 10px;
+        margin: 10px;
+    }
+    /* modal templates */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 400px;
+        max-width: 100%;
+    }
+    /* close button of modal templates */
+    .modal-content > .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+        .modal-content > .close:hover, .modal-content > .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    .modal-title {
+        align-self: center;
+        margin-bottom: 0px;
+    }
+    .modal-message {
+        font-size: 16px;
+        align-self: center;
+    }
+        /* msg on 'login' block turn out weird in mobile, fix */
+        .modal-message.row {
+            white-space: pre;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    /* 'links' on the bottom the [login-template -> login block] */
+    #show-signin, #reset-password {
+        color: blue;
+        cursor: pointer;
+    }
+    /* Message text container */
+    .msg-content {
+        text-align: center;
+        font-size: 16px;
+        padding: 5px;
+        margin: 5px;
+    }
+    /* sytiling the some <a> insde the modal to match the theme */
+    .form-var-route {
+        min-width: 200px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 12px;
+        margin: 8px 2px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        align-self: center;
+        text-align: center;
+    }
+        .form-var-route:hover {
+            background-color: #45a049;
+        }
+/* ---- Forms style inside the modal ---- */
+    .modal input, .modal select {
+        padding: 12px 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+    }
+    .modal label {
+        margin: 8px;
+        font-family: Arial;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .modal input[type=submit] {
+        width: 20%;
+        min-width: 100px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 12px;
+        margin: 8px 2px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        align-self: center;
+    }
+        .modal input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        .modal input[type=submit].warning-submit:hover {
+            background-color: #c82333;
+        }
+    /* alert on the bottom of the form usually used to show input validation error */
+    form .alertForm {
+        padding: 10px;
+        margin: 8px 2px;
+        background-color: #c82333;
+        color: white;
+        width: 100%;
+        align-self: center;
+    }
+        /* the button to clse the alert span */
+        form .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+            form .closebtn:hover {
+                color: black;
+            }

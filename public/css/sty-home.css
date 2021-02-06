@@ -31,7 +31,8 @@ h2 {
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;
-            }      
+            }     
+                 /* Could be dinamic saving path in DB and feeding it on the template html tag style  */
                 .one { background-image: url(../img/task1.jpg)}
                 .two { background-image: url(../img/task2.jpg)}
                 .three { background-image: url(../img/task3.png)}

@@ -6,7 +6,6 @@
     font-family: Arial;
     display: flex;
     flex-direction: column;
-    height: 100vh;
     min-width: 350px;
     padding: 10px;
   }
@@ -58,7 +57,7 @@
         }
     .banner {
         width: 100%;
-        height: 35%;
+        height: 35vh;
     }    
         .banner > img {
             width:100%;
