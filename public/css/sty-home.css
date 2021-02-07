@@ -1,3 +1,4 @@
+/* ------------- General in view ------------- */
 h2 {
     font-size: 30px;
     font-weight: bolder;
@@ -5,7 +6,6 @@ h2 {
     padding: 10px;
     text-align: center;
 }
-
 /* ------------- For image grid, just trying to show off with flexbox... ------------- */
     .flex-container {
         display: flex;
