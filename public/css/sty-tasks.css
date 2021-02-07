@@ -20,8 +20,9 @@
     margin-right: auto;
 }
 /* The sub-container for vertical tables, for mobile */
-.column[name=vertical-tables] {
+div[name=vertical-tables] {
     display: none;
+    width: 100%;
 }
   /* The table */
   .tasks-table {
@@ -94,7 +95,7 @@
     /* Media query to swicth between tables */
     /* When screen is smaller than 700px, swap tables */
     @media (max-width: 700px) {
-      .column[name=vertical-tables] {
+      div[name=vertical-tables] {
           display: table;
       }
       .tasks-table.horizontal {
