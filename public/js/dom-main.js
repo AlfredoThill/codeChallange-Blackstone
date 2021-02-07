@@ -7,10 +7,13 @@ menu_items.forEach( (item) => {
         item.classList.add('active-nav');
     }
 });
-// 2 . If user is logged-in show the 'Tasks' item on the menu
-checkStatus.then( (resp) => {
-    const results = JSON.parse(resp);
-    if (results.logged == true) {
-        console.log("hi")
-    }
-});
+
+// 2 . Frontside 'tasks' access handling
+// When the user is not logged-in show modal login form on click
+const tasks_menu_item = document.querySelector('#menu > a[name="tasks"]');
+tasks_menu_item.addEventListener('click', showModal );
+// When logged in, remove the listener and set 'href', refer to '/public/js/dom-user.js'
+function activateTasks() {
+    tasks_menu_item.removeEventListener('click', showModal );
+    tasks_menu_item.setAttribute('href','/task/index');
+}
