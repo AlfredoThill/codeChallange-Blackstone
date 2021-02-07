@@ -3,12 +3,13 @@
     <h2>Manage your tasks</h2>
     <hr>
     <div class="table-container column">
-        <button name="add-task">Add a Task</button>
+        <button id="add-task" name="add">Add a Task</button>
         {{!-- To be loaded with ajax --}}
-        <div name="tables">
+        <div id="task-tables">
             <h3 style="text-align: center;">You've got no tasks yet... add one!</h3>
         </div>
     </div>
     <hr>
+    <script src="/js/dom-task.js" defer></script>   
 </section>
 </div>  

@@ -160,32 +160,3 @@ function handleAwaitMsg(obj) {
     modalMSG.querySelector('span[name="msg-title"]').innerHTML = obj.title;
     modalMSG.querySelector('span[name="msg-content"]').innerHTML = obj.msg;
 }
-// Handle DELETE Warning.
-//      When any action requires user confirmation, usually for 'delete' operations,
-//      this modal block('modal-delete-warning') will be filled with the apropiate
-//      'form', 'title' and 'content'. Then the modal will be showed prompting the user
-//      for confirmation. Since the 'form' to be submited will be built on the spot the
-//      function also need the route('call') it'll be refering to and the callback to be executed.
-function handleDelete(form,title,content,call,callback){
-    // Defining the existing form in the modal, empty by default
-    const initialForm = document.getElementById('modal-delete');
-    // Filling title and content for the user to read
-    const titleWarning = document.getElementById('warning-title');
-        titleWarning.innerHTML = title;
-    const contentWarning = document.getElementById('warning-content');
-        contentWarning.innerHTML = content;
-    // Clone the input form and its nodes, then replace the original form
-    let clone = form.cloneNode(true);  // The clone doesn't retains its DOM events
-        initialForm.replaceWith(clone);
-        // Make sure the cloned form display is correct and assing its new 'id'
-        clone.style.display = null;
-        clone.setAttribute('id','modal-delete');
-    // If no 'call'(or 'callback') is feed the delete is a non-ajax form submission
-    if (call) {
-        // Prepare the form for submition
-        prepareForm('modal-delete','DELETE',call,callback);
-    }
-    // Display the modal
-    displayAllBut('logged-template','modal-delete-warning');
-    showModal();
-}

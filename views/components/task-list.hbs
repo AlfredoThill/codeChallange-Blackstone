@@ -1,4 +1,12 @@
     <table class="tasks-table horizontal">
+        <colgroup>
+            <col span="1" style="width: 15%;">
+            <col span="1" style="width: 40%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 15%;">
+        </colgroup> 
         <tr>
             <th>Task</th>
             <th>Description</th>
@@ -7,67 +15,84 @@
             <th>Completed</th>
             <th>Actions</th>
         </tr>
-        <tr>
-            <td>Do website</td>
-            <td>Make a simple app as part of an interview test.</td>
-            <td>02/02/2021</td>
-            <td>08/02/2021</td>
-            <td class="done">
-               <span>Yes</span> 
-            </td>
-            <td>
-              <div class="actions-container">
-                <div class="tooltip-container">
-                    <img class="action-img" src="/img/actions/tick.png">
-                    <span class="tooltip bottom">Mark as completed</span>
-                </div> 
-                <div class="tooltip-container">
-                    <img class="action-img" src="/img/actions/edit.png">
-                    <span class="tooltip bottom">Edit</span>
-                </div> 
-                <div class="tooltip-container">
-                    <img class="action-img" src="/img/actions/erase.png"> 
-                    <span class="tooltip bottom">Delete</span>
-                </div> 
-              </div>  
-            </td>
-        </tr>
+        {{#each list }}
+            <tr name="data-reference">
+                <td taskID={{this._id}} name="title">{{this.title}}</td>
+                <td class="description" name="description">{{this.description}}</td>
+                <td name="created_at">{{this.created_at}}</td>
+                <td name="due_date">{{this.due_date}}</td>
+                <td class={{this.class}}>
+                <span name="completed">{{this.completed}}</span> 
+                </td>
+                <td>
+                <div class="actions-container">
+                    <div class="tooltip-container">
+                        <img class="action-img task-action" name="tick" src="/img/actions/tick.png">
+                        <span class="tooltip bottom">Mark as completed</span>
+                    </div> 
+                    <div class="tooltip-container" name="edit">
+                        <img class="action-img task-action" name="edit" src="/img/actions/edit.png">
+                        <span class="tooltip bottom">Edit</span>
+                    </div> 
+                    <div class="tooltip-container" name="erase">
+                        <img class="action-img task-action" name="erase" src="/img/actions/erase.png"> 
+                        <span class="tooltip bottom">Delete</span>
+                    </div> 
+                </div>  
+                </td>
+            </tr>
+        {{/each}}
     </table>
 
-    <table class="tasks-table vertical">
-        <tr>
-            <th>Actions</th>
-            <td>
-              <div class="actions-container">
-                <div class="tooltip-container">
-                    <img class="action-img" src="/img/actions/tick.png">
-                    <span class="tooltip bottom">Mark as completed</span>
-                </div> 
-                <div class="tooltip-container">
-                    <img class="action-img" src="/img/actions/edit.png">
-                    <span class="tooltip bottom">Edit</span>
-                </div> 
-                <div class="tooltip-container">
-                    <img class="action-img" src="/img/actions/erase.png"> 
-                    <span class="tooltip bottom">Delete</span>
-                </div> 
-              </div>  
-            </td>
-        </tr>
-        <tr>
-           <th>Task</th>
-           <td>Do website</td>
-        </tr>
-         <tr>
-           <th>Description</th>
-           <td>Make a simple app as part of an interview test.</td>
-        </tr>
-        <tr>
-           <th>Completed</th> 
-           <td class="done">
-              <span>Yes</span> 
-           </td>
-        </tr>
-        
-        <tr><td colspan="2" style="border: white"></td></tr>
-    </table>
+    <div class="column" name="vertical-tables">
+        {{#each list }}
+            <table class="tasks-table vertical" name="data-reference">
+                <colgroup>
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 80%;">
+                </colgroup>  
+                    <tr>
+                        <th>Actions</th>
+                        <td>
+                        <div class="actions-container">
+                            <div class="tooltip-container">
+                                <img class="action-img task-action" name="tick" src="/img/actions/tick.png">
+                                <span class="tooltip bottom">Mark as completed</span>
+                            </div> 
+                            <div class="tooltip-container">
+                                <img class="action-img task-action" name="edit" src="/img/actions/edit.png">
+                                <span class="tooltip bottom">Edit</span>
+                            </div> 
+                            <div class="tooltip-container">
+                                <img class="action-img task-action" name="erase" src="/img/actions/erase.png"> 
+                                <span class="tooltip bottom">Delete</span>
+                            </div> 
+                        </div>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Task</th>
+                        <td taskID={{this._id}} name="title">{{this.title}}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td class="description" name="description">{{this.description}}</td>
+                    </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td name="created_at">{{this.created_at}}</td>
+                    </tr>
+                    <tr>
+                        <th>Due Date</th>
+                        <td name="due_date">{{this.due_date}}</td>
+                    </tr>
+                    <tr>
+                        <th>Completed</th> 
+                        <td class={{this.class}}>
+                            <span name="completed">{{this.completed}}</span> 
+                        </td>
+                    </tr>
+                
+            </table>
+        {{/each}}
+    </div>

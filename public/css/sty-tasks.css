@@ -1,5 +1,5 @@
 /* Add Task Button */
-button[name=add-task] {
+#add-task {
     width: 200px;
     background-color: #4CAF50;
     color: white;
@@ -19,79 +19,85 @@ button[name=add-task] {
     margin-left: auto;
     margin-right: auto;
 }
-/* The table */
-.tasks-table {
-    border-collapse: separate;
-    border-spacing: 0;
-    width: 100%;  
-}
-.tasks-table.horizontal {
-    margin-bottom: 20px;
-    margin-top: 20px;  
-}
-.tasks-table.vertical {
-    margin-top: 20px; 
+/* The sub-container for vertical tables, for mobile */
+.column[name=vertical-tables] {
     display: none;
 }
-  /* General */
-  .tasks-table td, .tasks-table th {
-    border: 1px solid #ddd;
-    padding: 10px;  
-    text-align: center;
+  /* The table */
+  .tasks-table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%; 
+      margin-bottom: 20px;
+      margin-top: 20px;  
   }
-  .tasks-table.horizontal tr:nth-child(even){background-color: #f2f2f2;}
-  .tasks-table.horizontal tr:hover {background-color: #ddd;}
-  /* Headers */
-  .tasks-table th {
-    background-color: #333;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  /* Data */
-    /* Some extra style for the 'Completed' column */
-    td.done {
-        color: rgb(0, 143, 0);
-        background-color:rgb(163, 225, 163)
+    /* General */
+    .tasks-table td, .tasks-table th {
+      border: 1px solid #ddd;
+      padding: 10px;  
+      text-align: center;
     }
-    td.danger {
-        color: rgb(177, 33, 1);
-        background-color:rgb(225, 167, 163)
+    .tasks-table.horizontal tr:nth-child(even){background-color: #f2f2f2;}
+    .tasks-table.horizontal tr:hover {background-color: #ddd;}
+    /* Headers */
+    .tasks-table th {
+      background-color: #333;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
     }
-    td > span {
-        display:block;
-        margin:0 auto;
-        font-weight: bolder;
-    }
-    /* Adding flex to tooltip containers in 'Actions' */
-    td .tooltip-container {
-        flex: auto;
-    }
+    /* Data */
+      /* Description Column */
+      td.description {
+        word-wrap: anywhere;
+      }
+      /* Some extra style for the 'Completed' column */
+      td.done {
+          color: rgb(0, 143, 0);
+          background-color:rgb(163, 225, 163)
+      }
+      td.danger {
+          color: rgb(177, 33, 1);
+          background-color:rgb(225, 167, 163)
+      }
+      td > span {
+          display:block;
+          margin:0 auto;
+          font-weight: bolder;
+      }
+      /* Adding flex to tooltip containers in 'Actions' */
+      td .tooltip-container {
+          flex: auto;
+      }
 
-  /* Rounded borders for horizontal table, kinda */
-  .tasks-table.horizontal th:first-child { border-top-left-radius: 10px; }
-  .tasks-table.horizontal th:last-child { border-top-right-radius: 10px; }
-  .tasks-table.horizontal tr:last-child td:first-child { border-bottom-left-radius: 10px; }
-  .tasks-table.horizontal tr:last-child td:last-child { border-bottom-right-radius: 10px; }
+    /* Rounded borders for horizontal table, kinda */
+    .tasks-table.horizontal th:first-child { border-top-left-radius: 10px; }
+    .tasks-table.horizontal th:last-child { border-top-right-radius: 10px; }
+    .tasks-table.horizontal tr:last-child td:first-child { border-bottom-left-radius: 10px; }
+    .tasks-table.horizontal tr:last-child td:last-child { border-bottom-right-radius: 10px; }
 
-  /* Actions into last table colummn */
-  .actions-container {
-    display:flex;
-    justify-content: center;
-  }
-    /* The img that triggers the action or shows the form */
-    .action-img {
-       height: 20px;
-       cursor: pointer;
+    /* Actions into last table colummn */
+    .actions-container {
+      display:flex;
+      justify-content: center;
     }
+      /* The img that triggers the action or shows the form */
+      .action-img {
+        height: 20px;
+        cursor: pointer;
+      }
+      /* Tooltip displacement */
+      td .tooltip {
+        right: 50%;
+      }
 
-  /* Media query to swicth between tables */
-  /* When screen is smaller than 700px, swap tables */
-  @media (max-width: 700px) {
-    .tasks-table.vertical {
-        display: table;
+    /* Media query to swicth between tables */
+    /* When screen is smaller than 700px, swap tables */
+    @media (max-width: 700px) {
+      .column[name=vertical-tables] {
+          display: table;
+      }
+      .tasks-table.horizontal {
+          display: none;
+      }
     }
-    .tasks-table.horizontal {
-        display: none;
-    }
-  }
