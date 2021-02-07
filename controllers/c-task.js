@@ -102,11 +102,12 @@ exports.updateTask = async (req, res, next) => {
       const taskID = req.body['id'];
       const title = req.body['title'];
       const description = req.body['description'];
-      const completed = req.body['completed'];
+      let completed = req.body['completed'];
+      if (completed == 1) { completed = true } else {completed = false };
       let args = { 
         "filter": { "_id": new ObjectId(userID) }, 
         "update": { $set: { 
-          "tasks.$[elem].updated_ata": new Date(),
+          "tasks.$[elem].updated_at": new Date(),
           "tasks.$[elem].title": title,
           "tasks.$[elem].description": description,
           "tasks.$[elem].completed": completed

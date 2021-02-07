@@ -70,33 +70,38 @@ function make_task_form(button,type) {
     resetVariableForm();
     // Creating an empty Object
     let data = new Object();
+    let task_title_input,title_label,task_description_input,description_label,task_dueDate_input,dueDate_label,
+        data_reference,title_ref,description_ref,completed_ref,task_id_input,task_completed_input,completed_label
     switch (type) {
         // Add a Task
         case 'add':
-          // Building elements
-          let task_title_input = document.createElement("INPUT");
+          // - Building elements
+          // Title  
+          task_title_input = document.createElement("INPUT");
             task_title_input.setAttribute("type", "text");
             task_title_input.setAttribute("name", "title");
             task_title_input.setAttribute("maxlength", "30");
             task_title_input.setAttribute("required","");
-          let title_label = document.createElement("LABEL");
+          title_label = document.createElement("LABEL");
             title_label.innerHTML = "Title";  
-          let task_description_input = document.createElement("TEXTAREA");
+          // Description  
+          task_description_input = document.createElement("TEXTAREA");
             task_description_input.setAttribute("name", "description");
             task_description_input.setAttribute("rows", "5");
             task_description_input.setAttribute("maxlength", "150");
             task_description_input.setAttribute("required","");
-          let description_label = document.createElement("LABEL");
+          description_label = document.createElement("LABEL");
             description_label.innerHTML = "Description";   
-          let task_dueDate_input = document.createElement("INPUT");
+          // Due Date  
+          task_dueDate_input = document.createElement("INPUT");
             task_dueDate_input.setAttribute("type", "date");
             task_dueDate_input.setAttribute("name", "due-date");
             let today = currentISOdate();
             task_dueDate_input.setAttribute("min", today);
             task_dueDate_input.setAttribute("required","");
-          let dueDate_label = document.createElement("LABEL");
+          dueDate_label = document.createElement("LABEL");
             dueDate_label.innerHTML = "Due Date";   
-          // Populating the form's content
+          // - Populating the form's content
           content.append(title_label);
           content.append(task_title_input);
           content.append(description_label);
@@ -105,63 +110,88 @@ function make_task_form(button,type) {
           content.append(task_dueDate_input);
           title.innerHTML = 'Add a Task'
           msg.innerHTML = 'You are about to add a new task.';
-          // Defining the data to return
+          // - Defining the data to return
           data['type'] = 'POST';
           data['call'] = '/task/create';
           break;
         case 'erase':
-          // Building elements
-          let data_reference = button.closest('[name="data-reference"]');
-          let title_ref = data_reference.querySelector('[name="title"]');
-          let task_id_input = document.createElement("INPUT");
+          // - Reference   
+          data_reference = button.closest('[name="data-reference"]');
+          title_ref = data_reference.querySelector('[name="title"]');
+          // - Building elements, only needed task 'id'
+          task_id_input = document.createElement("INPUT");
             task_id_input.setAttribute("type", "hidden");
             task_id_input.setAttribute("name", "id");
             task_id_input.setAttribute("value", title_ref.getAttribute('taskID'));
             task_id_input.setAttribute("required","");
-          // Populating the form's content  
+          // - Populating the form's content  
           content.append(task_id_input);  
           title.innerHTML = 'Warning!'  
           msg.innerHTML = 'You are about to delete the task titled "' + title_ref.innerHTML + '", this action is permanent. Are you sure?';
-          // Defining the data to return
+          // - Defining the data to return
           data['type'] = 'PUT';
           data['call'] = '/task/destroy';
           break;
-        case 'edit':
-            // Building elements
-            let data_reference = button.closest('[name="data-reference"]');
-            let title_ref = data_reference.querySelector('[name="title"]');
-            let task_id_input = document.createElement("INPUT");
+        case 'edit':     
+            data_reference = button.closest('[name="data-reference"]');
+            // - References
+            title_ref = data_reference.querySelector('[name="title"]');
+            description_ref = data_reference.querySelector('[name="description"]');
+            completed_ref = data_reference.querySelector('[name="completed"]');
+            // - Building elements
+            // id
+            task_id_input = document.createElement("INPUT");
                 task_id_input.setAttribute("type", "hidden");
                 task_id_input.setAttribute("name", "id");
                 task_id_input.setAttribute("value", title_ref.getAttribute('taskID'));
                 task_id_input.setAttribute("required","");
-            let task_title_input = document.createElement("INPUT");
+            // Title
+            task_title_input = document.createElement("INPUT");
                 task_title_input.setAttribute("type", "text");
                 task_title_input.setAttribute("name", "title");
                 task_title_input.setAttribute("maxlength", "30");
-                task_title_input.setAttribute("maxlength", "30");
+                task_title_input.setAttribute("value", title_ref.innerHTML);
                 task_title_input.setAttribute("required","");
-            let title_label = document.createElement("LABEL");
+            title_label = document.createElement("LABEL");
                 title_label.innerHTML = "Title";  
-            let task_description_input = document.createElement("TEXTAREA");
+            // Description    
+            task_description_input = document.createElement("TEXTAREA");
                 task_description_input.setAttribute("name", "description");
                 task_description_input.setAttribute("rows", "5");
                 task_description_input.setAttribute("maxlength", "150");
+                task_description_input.value = description_ref.innerHTML;
                 task_description_input.setAttribute("required","");
-            let description_label = document.createElement("LABEL");
+            description_label = document.createElement("LABEL");
                 description_label.innerHTML = "Description";   
-            let task_dueDate_input = document.createElement("INPUT");
-                task_dueDate_input.setAttribute("type", "date");
-                task_dueDate_input.setAttribute("name", "due-date");
-                let today = currentISOdate();
-                task_dueDate_input.setAttribute("min", today);
-                task_dueDate_input.setAttribute("required","");
-            let dueDate_label = document.createElement("LABEL");
-                dueDate_label.innerHTML = "Due Date";       
-            content.append(task_id_input);  
-            // Defining the data to return
+            // Completed    
+            task_completed_input = document.createElement("SELECT");
+                task_completed_input.setAttribute("name", "completed");
+                let option1 = document.createElement("option");
+                    option1.text = "No";
+                    option1.value = 0;
+                task_completed_input.add(option1);
+                let option2 = document.createElement("option");
+                    option2.text = "Yes";
+                    option2.value = 1;
+                task_completed_input.add(option2);
+                let selected = 0;
+                if (completed_ref.innerHTML == "Yes") { selected = 1 }
+                task_completed_input.selectedIndex = selected;
+            completed_label = document.createElement("LABEL");
+                completed_label.innerHTML = "Completed";    
+            // - Populating the form's content
+            content.append(task_id_input); 
+            content.append(title_label);
+            content.append(task_title_input);
+            content.append(description_label);
+            content.append(task_description_input);
+            content.append(completed_label);
+            content.append(task_completed_input);
+            title.innerHTML = 'Edit a Task'
+            msg.innerHTML = 'You are about to edit a task.';
+            // - Defining the data to return
             data['type'] = 'PUT';
-            data['call'] = '/states_vendors/edit';
+            data['call'] = '/task/update';
           break;
         default:
           console.log('Missing action definer in html tag => (.admin-action-img[name])');
