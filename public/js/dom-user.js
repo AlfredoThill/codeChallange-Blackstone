@@ -9,7 +9,8 @@ function checkSession(){
     checkStatus = makeAjaxCall("/user/checkStatus","GET"); // promisify Ajax Call, refer to '/public/js/helpers/ajax-helper.js'
     // when the promises is resolved
     checkStatus.then( (resp) => {
-        const results = JSON.parse(resp); // parsing json for further use
+        const results = JSON.parse(resp);
+        // Save result in dom for further use
         user_status = results;
         // Based on the param 'logged' we are gonna find out if the user is logged-in
         // 1.1 - The user is logged-in
@@ -53,6 +54,8 @@ function loginThen(form,resp) {
   const results = JSON.parse(resp);
   // login succesful
   if (results.logged == true) {
+      // Save result in dom for further use
+      user_status = results;
       // Show welcome msg an prepare dashboard
       displayAllBut('logged-template','modal-welcome');
       handleDashboard(results);
@@ -124,16 +127,12 @@ function pwdChangeThen(form,resp) {
 //3. Helpers Functions
 // Push Error
 function pushError(e) {
-    const errorObject = JSON.parse(e.response);
     // make sure the modal is shown
     showModal();
     displayAllBut('errors-template','modal-error');
-    document.getElementById('error-url').innerHTML = e.responseURL;
+    document.getElementById('error-msg').innerHTML = e.message;
     document.getElementById('error-status').innerHTML = e.status;
-    document.getElementById('error-statusText').innerHTML = e.statusText;
-    document.getElementById('error-msg').innerHTML = errorObject.message;
-    // Show full stack only while in DEV, 'comment' the line below while in production
-    document.getElementById('error-stack').innerHTML = e.response;
+    document.getElementById('error-stack').innerHTML = e;
     setTimeout(function () { location.reload() }, 10000);
 }
 // Populate dashboard
