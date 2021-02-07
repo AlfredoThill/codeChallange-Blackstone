@@ -137,7 +137,6 @@ function make_task_form(button,type) {
             // - References
             title_ref = data_reference.querySelector('[name="title"]');
             description_ref = data_reference.querySelector('[name="description"]');
-            completed_ref = data_reference.querySelector('[name="completed"]');
             // - Building elements
             // id
             task_id_input = document.createElement("INPUT");
@@ -166,6 +165,7 @@ function make_task_form(button,type) {
             // Completed    
             task_completed_input = document.createElement("SELECT");
                 task_completed_input.setAttribute("name", "completed");
+                task_completed_input.setAttribute("required", '');
                 let option1 = document.createElement("option");
                     option1.text = "No";
                     option1.value = 0;
@@ -174,9 +174,12 @@ function make_task_form(button,type) {
                     option2.text = "Yes";
                     option2.value = 1;
                 task_completed_input.add(option2);
-                let selected = 0;
-                if (completed_ref.innerHTML == "Yes") { selected = 1 }
-                task_completed_input.selectedIndex = selected;
+                let option3 = document.createElement("option");
+                    option3.text = "Select an option.";
+                    option3.setAttribute("disabled",'');
+                    option3.setAttribute("selected",'');
+                    option3.setAttribute("hidden",'');
+                task_completed_input.add(option3);
             completed_label = document.createElement("LABEL");
                 completed_label.innerHTML = "Completed";    
             // - Populating the form's content
