@@ -34,7 +34,6 @@
     align-self: flex-start;
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
   }
     .topnav a, .topnav span {
         display: block;
@@ -46,7 +45,8 @@
         font-weight: bolder;
     }
     #show-modal {
-        margin-left: auto; /* kinda float left */
+        margin-left: auto;
+        margin-right: auto;
     }
         .topnav a:hover, .topnav span:hover {
             background-color: #ddd;
