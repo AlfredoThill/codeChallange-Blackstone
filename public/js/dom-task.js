@@ -22,8 +22,9 @@ const add_button = document.getElementById("add-task");
 // Since there's only 1 of these and it's outside the component 
 // let's just assing the event
 add_button.addEventListener('click', setTaskAction.bind(add_button) );
+
 // There are many of these and they are loaded along side the
-// component, 'tasks-list' so we gotta refresh these listeners
+// component, 'tasks-list', so we gotta refresh these listeners
 // with the component
 function setTasks_inTable() {
     const task_edit_buttons = document.querySelectorAll('.task-action[name="edit"]');
@@ -31,8 +32,35 @@ function setTasks_inTable() {
     const task_tick_buttons = document.querySelectorAll('.task-action[name="tick"]');
     task_edit_buttons.forEach( (button) => { button.addEventListener('click', setTaskAction.bind(button) )});
     task_erase_buttons.forEach( (button) => { button.addEventListener('click', setTaskAction.bind(button) )});
-    // task_tick_buttons
+    // With the 'tick' actions we don't really need user confirmation, when the users clicks the icon 
+    // we are gonna set the task as commpleted. So, there's no need to build a form or anything, let's just
+    // make an ajax call faking the inputs
+    task_tick_buttons.forEach( (button) => {
+      button.addEventListener('click', () => {
+        let data = new Object(); 
+        let type = "PUT"; 
+        let call= '/task/mark';
+        const data_reference = button.closest('[name="data-reference"]');
+        const id = data_reference.querySelector('[name="title"]').getAttribute('taskID');
+        data['id'] = id;
+        data['completed'] = 1;
+        const args = encodeData(data);
+        // The promise
+        let operationAttempt = makeAjaxCall(call,type,args,"application/x-www-form-urlencoded");
+          // When its resolved succesfully, bind callback with variables
+          operationAttempt.then( () => {
+            // Refresh the component
+            let push_tasks = push_taskList();
+            // Reload tables actions
+            push_tasks.then( () => { setTasks_inTable() });
+          });
+          operationAttempt.catch( (e) => {
+              pushError(e);
+          })
+      });
+    });
 }
+
 // The listener to assing the action depending on the 'button'
 function setTaskAction() {
     const type = this.getAttribute('name');

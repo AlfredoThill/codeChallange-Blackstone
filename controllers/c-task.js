@@ -103,6 +103,7 @@ exports.updateTask = async (req, res, next) => {
       const title = req.body['title'];
       const description = req.body['description'];
       let completed = req.body['completed'];
+      // Integer to boolean, just in case
       if (completed == 1) { completed = true } else {completed = false };
       let args = { 
         "filter": { "_id": new ObjectId(userID) }, 
@@ -130,6 +131,44 @@ exports.updateTask = async (req, res, next) => {
       res.json(result);
       client.close() 
     }
+};
+
+// # ajax PUT, mark as completed (partial update)
+exports.markCompleted = async (req, res, next) => {
+  // Keep conection open since route implies several queries 
+  const client = await invokeClient(); 
+  const collection = client.db('codeChallange').collection('users');  
+  let result = {};
+  try {
+    const userID = req.session.userID;
+    const taskID = req.body['id'];
+    let completed = req.body['completed'];
+    // Integer to boolean, just in case
+    if (completed == 1) { completed = true } else {completed = false };
+    let args = { 
+      "filter": { "_id": new ObjectId(userID) }, 
+      "update": { $set: { 
+        "tasks.$[elem].updated_at": new Date(),
+        "tasks.$[elem].completed": completed
+       } 
+      },
+      "arrayfilter": { arrayFilters: [ { "elem._id": parseInt(taskID) } ] }
+    };
+    let update = await collection.updateOne(args.filter,args.update,args.arrayfilter);
+    if (update.modifiedCount == 1) {
+      result = { success: true };
+    }
+    else {
+      result = { success: false, msg: 'The task was not found...' }
+    }
+  }
+  catch (e) {
+    result = { success: false, msg: e };   
+  }
+  finally { 
+    res.json(result);
+    client.close() 
+  }
 };
 
 // # ajax PUT, destroy task ==> update user
