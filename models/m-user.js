@@ -15,7 +15,7 @@ class User {
     this.password = password;
     this.tasks = tasks || []; // array of objects
     this.verified = verified || null;
-    this.expires = expires || null;
+    this.expire = expires || null;
   }
 
   async save() {

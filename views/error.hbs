@@ -1,3 +1,11 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<section>
+    <div class='column' id='error'>
+        <h1>Whoops...</h1>
+        <p>Sorry, there's been some kind of error. If the error persists please send a report.</p>
+        <div><b>Message: </b> <span id='error-msg'> {{message}} </span></div>
+        <div><b>Status: </b> <span id='error-status'> {{error.status}} </span></div>
+        <pre id='error-stack'>{{error.stack}}</pre>
+        <a href="/" class='error-var-route'>Go Home</a>
+        <a class='error-var-route'>Send Report</a>
+    </div>
+</section>

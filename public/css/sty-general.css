@@ -92,6 +92,29 @@
         .fa:hover {
             opacity: 0.7;
         }
+/* ----------------------- Error ----------------------- */
+  #error {
+    margin: 10px auto 10px auto;
+    padding: 20px;
+    border: 10px solid rgb(232, 9, 9);
+    max-width: 100%;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+  }          
+  .error-var-route {
+    width: 600px;
+    max-width: 80%;
+    background-color: #838383;
+    color: white;
+    padding: 8px 12px;
+    margin: 8px 2px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
 /* ----------------------- Generic Rules ----------------------- */
   section {
     flex: 1 0;
@@ -105,4 +128,27 @@
     display: flex;
     flex-direction: column;
   }
-    
+  /* Tooltip */
+  .tooltip-container {
+    position: relative;
+  }
+  .tooltip-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+      .tooltip {
+        visibility: hidden;
+        background-color: black;
+        position: absolute;
+        border-radius: 50px;
+        padding: 12px;
+        z-index: 1;
+        width: 200px;
+        color: white;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 1s;
+      }  
+        .tooltip.top {
+          bottom: 100%;
+        }

@@ -106,7 +106,8 @@ exports.signIn = async (req, res, next) => {
 
 // # After 'sign-in'the user must confirm it's account or it'll be deleted (by scheduled procedure in mongo)
 exports.confirmAccount = async (req, res, next) => {
-    // Just 'verify' the account
+    // 'verify' the account, unverifed ones are deleted every hour by a trigger on mongo
+    // based on their expiration.
     let id = req.query.id;
     let hash = req.query.token;
     let args = {
@@ -142,6 +143,7 @@ exports.resetPwd = async (req, res, next) => {
 
 // # After requesting a password reset the user still has to validate it on it's email
 exports.confirmReset = async (req, res, next) => {
+    // Pending: add 'expiration' to this feature
     let id = req.query.id;
     let hash = req.query.token;
     try {
