@@ -38,9 +38,13 @@ let send = async function sendMail(mail,kind,params) {
         html: html,
         };
     await transporter.sendMail(mailOptions);
+    result = { success: true };
+    return result;
     }
   catch (e) {
-    console.log('Send Email failed: '+ e)
+    console.log('Send Email failed: '+ e);
+    result = { success: false, msg: "There's been some error with our mailer service, please try again later.", error: e };
+    return result;
   }   
 }
 

@@ -1,0 +1,23 @@
+<html>
+    <body>
+        <div style="display: grid;font-family: Arial; padding: 10px;background: #f1f1f1;border: 5px solid #888;border-radius: 10px;">
+            <h2>Hello {{name}}!</h2>
+            <div>
+            <p style='text-align: justify'>
+             Your registration is almost done. If you didn't requested an account just ignore this mail. Else, go ahead and click in the link below. Your account will be confirmed and you'll be ready to log in. Don't take too long though, this link expires.
+            </p> 
+            </div>
+            <div class="content" style='justify-self: center'>
+             <a href="{{link}}"><b>CONFIRM MY ACCOUNT</b></a>
+            </div>
+            <p style='text-align: justify; font-size: 8px'>
+             If clicking doesn't work just copy this link "{{link}}" into your browser.
+            </p> 
+            <div>
+            <p>
+             Thank you.
+            </p>  
+            </div>
+        </div>
+    </body>
+</html>

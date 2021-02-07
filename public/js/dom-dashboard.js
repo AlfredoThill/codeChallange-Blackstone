@@ -52,7 +52,7 @@ logged_acknowledge.addEventListener('click', () => {
 // Change password, when the logged users wants to change it's pass, switch blocks
 logged_show_change_pwd.addEventListener('click', () => {
   logged_dashboard.style.display = 'none';
-  logged_show_change_pwd.style.display = null;
+  logged_change_pwd.style.display = null;
 })
 
 // ### -------------- Helpers ---------------- ###

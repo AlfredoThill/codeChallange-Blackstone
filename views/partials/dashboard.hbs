@@ -22,9 +22,9 @@
 
       <!-- The modal block for sign-in -->
       <div class='column' id='signin-content' style='display: none'>
+          <h2 class='modal-title'>Create Account</h2>
+          <hr>
           <form class='column' id='signin-form'>
-            <h2 class='modal-title'>Create Account</h2>
-            <hr>
             <label for="signin-name">Name</label>
             <input type="text" id="signin-name" name="signin-name" required>
             <label for="signin-mail">Email</label>
@@ -41,9 +41,9 @@
 
       <!-- The modal block for reset password feature -->
       <div class='column' id='forgot-content' style='display: none'>
+        <h2 class='modal-title'>Reset Password</h2>
+        <hr>
         <form class='column' id='reset-form'>
-          <h2 class='modal-title'>Reset Password</h2>
-          <hr>
           <label for="reset-mail">Email:</label>
           <input type="email" id="reset-mail" name="reset-mail" required>
           <div class="alertForm" style="display: none"><span class="closebtn" onclick="this.parentElement.style.display= 'none';">&times;</span><span name='modal-alert'></span></div>
@@ -54,8 +54,8 @@
       <!-- The modal block for showing a msg when the user is not loggedin -->
       <div class='column' id='await-msg' style='display: none'>
           <h2 class='modal-title'><span name='msg-title'></span></h2>
+          <hr>
           <div class='column'>
-              <hr style='margin: 10px;'>
               <p>
                 <span name='msg-content'></span>
               </p>
@@ -73,7 +73,6 @@
           <h2 class='modal-title'>Welcome!</h2>
           <hr>
           <div class='column'>
-              <hr style='margin: 10px;'>
               <p>
                   Hi <span name='modal-user-name'></span>, you are already logged in. Have a nice one!
               </p>
@@ -85,16 +84,15 @@
           <h2 class='modal-title'><span name='modal-user-name'></span></h2>
           <hr>
           <div class='column'>
-              <hr style='margin: 10px;'>
                 <span class='form-var-route' id='show-change-pwd'>Change Password</span>
-                <a href="/user/logout" class='form-var-route'>Logout</a>
+                <a href="/user/out" class='form-var-route'>Logout</a>
           </div>
         </div>
         <!-- The modal block for the change password feature -->
         <div class='column' id='change-pwd-modal' style='display: none'>
+          <h2 class='modal-title'>Change Password</h2>
+          <hr>
           <form class='column' id='change-pwd-form'>
-            <h2 class='modal-title'Change Password</h2>
-            <hr>
             <label for="old-pwd">Old Password:</label>
             <input type="password" id="old-pwd" name="old-pwd" required>
             <label for="new-pwd">Password:</label>
@@ -109,8 +107,8 @@
         <!-- The modal block to show a msg to the already logged-in user -->
         <div class='column' id='modal-msg' style='display: none'>
           <h2 class='modal-title'><span id='msg-title'></span></h2>
+          <hr>
           <div class='column'>
-              <hr style='margin: 10px;'>
               <p>
                   <span id='msg-content'></span>
               </p>
@@ -121,7 +119,6 @@
           <h2 class='modal-title'><span id='warning-title'></span></h2>
           <hr>
           <div class='column'>
-              <hr style='margin: 10px;'>
               <p>
                 <span id='warning-content'></span>
               </p>
@@ -130,12 +127,10 @@
         </div>
         <!-- The modal block to for javascript generated forms that we wanna get into the modal, if any -->
         <div class='column' id='modal-form' style='display: none'>
+          <h2 class='modal-title'></h2>
+          <hr>
               <form class='column' id='variable-form'>
-                <h2 class='modal-title'></h2>
-                <hr>
-                <hr style='margin: 10px;'>
-                <div class='modal-message'></div>
-                <hr style='margin: 10px;'>
+                <div class='modal-message'></div>  
                 <div id='variable-form-content'></div>
                 <div class="alertForm" style="display: none"><span class="closebtn" onclick="this.parentElement.style.display= 'none';">&times;</span><span name='modal-alert'></span></div>
                 <input type="submit" value="Submit" id='variable-form-submit'>
@@ -155,7 +150,7 @@
             <h2 class='modal-title'>Whoops!</span></h2>
             <hr>
             <div class='column'>
-                <hr style='margin: 10px;'>
+                
                 <p>Sorry, there's been some kind of error. If the error persists please send a report.</p>
                 <div class='columm' id='error-container'>
                   <b>URL: </b> <span id='error-url'></span> <br>

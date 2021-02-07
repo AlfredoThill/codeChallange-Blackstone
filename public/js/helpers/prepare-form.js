@@ -19,10 +19,8 @@ function prepareForm(formID,type,call,callback) {
         // Building the data to append in the call, refer to '/public/js/helpers/ajax-helper.js'
         const data = formData(form);
         const args = encodeData(data);
-        // Getting the token for csrf protection
-        const token = form.querySelector('meta[name="csrf-token"]').getAttribute('content');
         // The promise
-        let operationAttempt = makeAjaxCall(call,type,args,token,"application/x-www-form-urlencoded");
+        let operationAttempt = makeAjaxCall(call,type,args,"application/x-www-form-urlencoded");
           // When its resolved succesfully, bind callback with variables
           operationAttempt.then( callback.bind(null,form) );
           // On error show it to the user
@@ -52,10 +50,8 @@ function prepareUpload(formID,type,call,callback) {
         submitBtn.style.opacity = 0.5;
         // Using FormData to create key-value pairs encoded like "multipart/form-data"
         const data = new FormData(form);
-        // Getting the token for csrf protection
-        const token = form.querySelector('meta[name="csrf-token"]').getAttribute('content');
         // The promise
-        let operationAttempt = makeAjaxCall(call,type,data,token);
+        let operationAttempt = makeAjaxCall(call,type,data);
           // When its resolved succesfully, bind callback with variables
           operationAttempt.then( callback.bind(null,form) );
           // On error show it to the user

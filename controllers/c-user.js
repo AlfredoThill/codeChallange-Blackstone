@@ -95,12 +95,12 @@ exports.signIn = async (req, res, next) => {
         } 
         // Insert the new entry. Maybe use my brand new user model? Come back later...
         let insert = await query('users','insert', newdoc);
-        result = { success: true, title: 'Awaiting Confirmation', msg: 'An email has just been sent to your adress. There you will find a link, click it and you are done!' };
-        res.json(result);
-        let link = "http:" + req.headers.host + "/users/confirm" + "?id=" + insert.insertedId + "&token=" + hash; 
+        let link = "http:" + req.headers.host + "/user/confirm" + "?id=" + insert.insertedId + "&token=" + hash; 
         const params = { "name": name, "link": link };
         // Send confirmation email
         await sendEmail(mail,'sign-in',params);
+        result = { success: true, title: 'Awaiting Confirmation', msg: 'An email has just been sent to your adress. There you will find a link, click it and you are done!' }
+        res.json(result);
     }
 };
 
