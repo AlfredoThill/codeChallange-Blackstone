@@ -9,8 +9,8 @@ moment, taught me a lot, but I like node very much and I wanna dive deep into it
 it's deployed using heroku.
 
 Regarding testing: as requested by the 'code challange' testing has been set in place using mocha/chai. In order
-to run the tests a '.env' file will be provided with testing credentials. To run em, 'npm test'. Note: So far I haven't 
-been able to mock session variables in my tests, im ussing 'express-session', so you'll see 3 skipped tests regarding 
+to run the tests a '.env' file will be provided with testing credentials, place it on the root folder. Then run the tests, 'npm test'. 
+Note: So far I haven't been able to mock session variables in my tests, im ussing 'express-session', so you'll see 3 skipped tests regarding 
 the 'Task' controller. I did come up with some alternatives, like using a custom middleware for these routes,
 rewriting the backend logic or changing the session package but I felt any of these would defeat the purpose.
 
