@@ -54,6 +54,7 @@ exports.login = async (req, res, next) => {
         else { msg = 'Email not registered.'}
         result = { logged: false, msg: msg };
     }
+    console.log(res.json(result));
     res.json(result)
 };
 
