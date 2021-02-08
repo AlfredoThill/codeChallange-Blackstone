@@ -12,14 +12,19 @@ const mail_pwd = process.env.MAILER_PASS;
 //   on another proyect. I'll be using it instead of mail trap so you can really get
 //   get some mails.
 let send = async function sendMail(mail,kind,params) {
- let template;
- if (kind == 'sign-in') {
-  template = templates.confirmation_mail
+ let template; let html;
+ switch (kind) {
+   case 'sign-in':
+    template = templates.confirmation_mail;
+    html = template(params);
+    break;
+   case 'pwd-reset':
+    template = templates.reset_mail;
+    html = template(params);
+    break;
+   default:
+    html = "<h1>Some html content for the email</h1>";
  }
- else if (kind == 'pwd-reset') { 
-  template = templates.reset_mail 
- }
- let html = template(params);
   try {  
     const transporter = nodemailer.createTransport({
         service: 'gmail',

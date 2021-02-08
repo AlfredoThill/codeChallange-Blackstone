@@ -12,6 +12,7 @@ let client = async function() {
    try { 
     const uri = 'mongodb+srv://' + db_user + ':' + db_pwd +'@cluster0-luguo.gcp.mongodb.net/codeChallange?ssl=true&authSource=admin&w=majority';
     const client = new MongoClient(uri, { useNewUrlParser: true }); // App crashing on heruku with 'useUnifiedTopology: true'
+    console.log("NOTE: App crashing on heruku with 'useUnifiedTopology: true'");
     await client.connect();
     return client
    }
