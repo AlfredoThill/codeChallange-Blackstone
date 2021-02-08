@@ -34,6 +34,7 @@ describe('User router tests, checks basic functionality', () => {
     describe ('Sign In Features', () => {
         let test_email = faker.internet.email(); let test_pwd = faker.internet.password();
         it('Request Account, server accepts new user entry', async function() {
+            this.timeout(6000);
             let response = await chai.request(url)
                                      .post('/user/sign')
                                      .send({ 'signin-name': "test_user", 'signin-mail': test_email, 'signin-pwd': test_pwd });

@@ -25,7 +25,7 @@ exports.fetchTasks = async (req, res, next) => {
         let html;
         // Check number of tasks
         if (user[0].tasks.length == 0) {
-            // No tasks of this user yet
+            // No tasks for this user yet
             html = "<h3 style='text-align: center;'>You've got no tasks yet... add one!</h3>";
         }
         else {
@@ -73,6 +73,7 @@ exports.createTask = async (req, res, next) => {
             "due_date": new Date(req.body['due-date']),
             "completed": false
             };
+        console.log(userID)
         let args = { "filter": { "_id": new ObjectId(userID) }, "update": { $push: { "tasks": task } } };
         let update = await collection.updateOne(args.filter,args.update)
         if (update.modifiedCount == 1) {
