@@ -32,17 +32,18 @@ describe('User router tests, checks basic functionality', () => {
     });
 
     describe ('Sign In Features', () => {
+        let test_email = faker.internet.email(); let test_pwd = faker.internet.password();
         it('Request Account, server accepts new user entry', async function() {
             let response = await chai.request(url)
                                      .post('/user/sign')
-                                     .send({ 'signin-name': "test_user", 'signin-mail': "test@test.com",'signin-pwd': "654321" });
+                                     .send({ 'signin-name': "test_user", 'signin-mail': test_email, 'signin-pwd': test_pwd });
             let results = new Object(response.body);
             expect(response).to.be.json;
             expect(results.success).to.be.equal(true); 
         });
         it('Confirm account, mocks when user clicks link on sent email', async function() {
             this.timeout(6000);
-            let find_doc = await query('users','find',{ 'email': "test@test.com" });
+            let find_doc = await query('users','find',{ 'email': test_email });
             let response = await chai.request(url)
                                      .get('/user/confirm?id=' + find_doc[0]._id + '&token=' + find_doc[0].password);
             // Asserts redirect to 'home', "/"
