@@ -238,15 +238,15 @@ function taskForm_then(form,resp) {
     if (results.success == true) {
         // Show msg asserting success
         handleMsg(results);
+        // Close the modal in 1 sec
+        setTimeout(function(){ 
+          hideModal() }, 2000);  
         // Refresh vendors_states
         let push_tasks = push_taskList();
         // Reload tables actions
         push_tasks.then( () => {
           // Assing actions on table buttons
-          setTasks_inTable();
-          // Close the modal in 2 secs
-          setTimeout(function(){ 
-              hideModal() }, 2000);   
+          setTasks_inTable(); 
         })
     }
     // change attemp failed because of validation
