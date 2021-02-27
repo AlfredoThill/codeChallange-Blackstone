@@ -5,18 +5,6 @@ const ObjectId = require('mongodb').ObjectID;
 // Requiring the model, dunno if im gonna use it yet
 const Task = require('../models/m-task');
 
-// # GET load task index
-exports.index = async (req, res, next) => {
-    // Check if user is logged in
-    if (req.session.userID) {
-        res.render('tasks');
-    }
-    else {
-        // Not logged in, redirect home
-        res.redirect('/');
-    }
-};
-
 // # ajax GET all the taks related to an user, 
 exports.fetchTasks = async (req, res, next) => {
     try {

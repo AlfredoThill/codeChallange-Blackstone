@@ -236,11 +236,6 @@ function taskForm_then(form,resp) {
     const results = JSON.parse(resp);
     // If operation was a success
     if (results.success == true) {
-        // Show msg asserting success
-        handleMsg(results);
-        // Close the modal in 1 sec
-        setTimeout(function(){ 
-          hideModal() }, 2000);  
         // Refresh vendors_states
         let push_tasks = push_taskList();
         // Reload tables actions

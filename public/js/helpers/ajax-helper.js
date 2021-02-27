@@ -15,9 +15,6 @@ function makeAjaxCall(url, methodType, data, contentType){
        // Make the XMLreq, the ajax call
        const xhr = new XMLHttpRequest();
        xhr.open(methodType, url, true);
-       // We'll set the accepted response to 'json' so laravel's error handler
-       // will know that we want a json back in the case of an error
-       xhr.setRequestHeader("Accept" , "application/json");
        // if there's data to append then set headers
        if (data) {
         // Unless specified we'll let the browser guess the content-type

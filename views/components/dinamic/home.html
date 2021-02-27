@@ -1,0 +1,61 @@
+<template id="home-template">
+    <!-- Style -->
+    <link rel='stylesheet' href='/css/sty-general.css'/>
+    <link rel='stylesheet' href='/css/sty-home.css'/>
+    <!-- Structure -->
+    <section class="view" name="home">
+        <h2><slot name="title">Default Title</slot></h2>
+        <hr>
+        <div class="flex-container">
+            <div class="flex-column">
+                <a class="flex-item background-img one">
+                    <div>
+                        <h1 class="title">Keep Track of your tasks</h1>
+                        <p class="sub-title">05/02/2021</p>
+                    </div>
+                </a>
+                <a class="flex-item background-img two">
+                    <div>
+                        <h1 class="title">Schedule on a Daily Basis</h1>
+                        <p class="sub-title">05/02/2021</p>
+                    </div>
+                </a>
+            </div>
+            <div class="flex-column">
+                <a class="flex-item background-img three">
+                    <div>
+                        <h1 class="title">Analize your Performance</h1>
+                        <p class="sub-title">05/02/2021</p>
+                    </div>
+                </a>
+            </div>
+            <div class="flex-column">
+                <a class="flex-item background-img four">
+                    <div>
+                        <h1 class="title">Keep Improving</h1>
+                        <p class="sub-title">05/02/2021</p>
+                    </div>
+                </a>
+                 <a class="flex-item background-img five">
+                    <div>
+                        <h1 class="title">Get to work!</h1>
+                        <p class="sub-title">05/02/2021</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</template>
+<script>
+    customElements.define('x-home',
+        class extends HTMLElement {
+            constructor() {
+            super();
+            let template = document.getElementById('home-template');
+            let templateContent = template.content;        
+            const shadowRoot = this.attachShadow({mode: 'open'})
+                .appendChild(templateContent.cloneNode(true));
+            }
+        }
+    );
+</script>

@@ -16,7 +16,6 @@ const taskRouter = require('./routes/r-task');
 const app = express();
 
 // view engine setup
-console.log(path.join(__dirname, 'views'));
 app.set('views', path.join(__dirname, 'views'));
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
