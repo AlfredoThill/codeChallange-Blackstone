@@ -4,7 +4,7 @@
     <link rel='stylesheet' href='/css/sty-home.css'/>
     <!-- Structure -->
     <section class="view" name="home">
-        <h2><slot name="title">Default Title</slot></h2>
+        <h2><slot name="title">Go back to work!</slot></h2>
         <hr>
         <div class="flex-container">
             <div class="flex-column">
@@ -56,6 +56,11 @@
             const shadowRoot = this.attachShadow({mode: 'open'})
                 .appendChild(templateContent.cloneNode(true));
             }
+            connectedCallback() {
+                console.log('Home component loaded!');
+                app_stateProxy.main_content = this.nodeName.toLowerCase();
+            }
         }
     );
+    
 </script>

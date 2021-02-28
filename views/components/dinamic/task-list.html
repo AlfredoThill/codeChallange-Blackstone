@@ -1,0 +1,207 @@
+<template id="task_list-template">
+    <!-- Style -->
+    <link rel='stylesheet' href='/css/sty-general.css'/>
+    <link rel='stylesheet' href='/css/sty-tasks.css'/>
+    <!-- Structure -->
+    <table class="tasks-table horizontal">
+        <colgroup>
+            <col span="1" style="width: 15%;">
+            <col span="1" style="width: 40%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 15%;">
+        </colgroup> 
+        <tr>
+            <th>Task</th>
+            <th>Description</th>
+            <th>Created At</th>
+            <th>Due Date</th>
+            <th>Completed</th>
+            <th>Actions</th>
+        </tr>
+    </table>
+    <div name="vertical-tables">
+        <!-- Loop -->
+            <table class="tasks-table vertical" name="data-reference">
+                <colgroup>
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 80%;">
+                </colgroup>  
+                    <tr>
+                        <th>Actions</th>
+                        <td>
+                        <div class="actions-container">
+                            <div class="tooltip-container">
+                                <img class="action-img task-action" name="tick" src="/img/actions/tick.png">
+                                <span class="tooltip bottom">Mark as completed</span>
+                            </div> 
+                            <div class="tooltip-container">
+                                <img class="action-img task-action" name="edit" src="/img/actions/edit.png">
+                                <span class="tooltip bottom">Edit</span>
+                            </div> 
+                            <div class="tooltip-container">
+                                <img class="action-img task-action" name="erase" src="/img/actions/erase.png"> 
+                                <span class="tooltip bottom">Delete</span>
+                            </div> 
+                        </div>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Task</th>
+                        <td taskID={{this._id}} name="title">{{this.title}}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td class="description" name="description">{{this.description}}</td>
+                    </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td name="created_at">{{this.created_at}}</td>
+                    </tr>
+                    <tr>
+                        <th>Due Date</th>
+                        <td name="due_date">{{this.due_date}}</td>
+                    </tr>
+                    <tr>
+                        <th>Completed</th> 
+                        <td class={{this.class}}>
+                            <span name="completed">{{this.completed}}</span> 
+                        </td>
+                    </tr>
+                
+            </table>
+        <!-- End Loop -->
+    </div>
+</template>
+<script>
+    customElements.define('x-task_list',
+        class extends HTMLElement {
+            // Specify observed attributes so that
+            // attributeChangedCallback will work
+            static get observedAttributes() {
+                return ['data-set']
+            }
+            constructor() {
+            super();
+            let template = document.getElementById('task_list-template');
+            let templateContent = template.content;        
+            const shadowRoot = this.attachShadow({mode: 'open'})
+                .appendChild(templateContent.cloneNode(true));
+            }
+            connectedCallback() {
+                console.log('task_list component loaded!');
+            }
+            attributeChangedCallback(name, oldValue, newValue) {
+                console.log('task_list "' + name + '"" attribute changed!');
+                if (name == 'data-set' && oldValue != newValue) {
+                    // Loop component with new data
+                    let data_set = JSON.parse(newValue);
+                    let table = document.querySelector('x-tasks').shadowRoot.querySelector('x-task_list').shadowRoot.querySelector('.tasks-table.horizontal')
+                    if (table != null) {
+                        for (let i = 0; i < data_set.length; i++) {
+                            this.insertRow(data_set[i],table);
+                        }
+                    }   
+                }
+            }
+            insertRow(data,table){
+                let data_reference = document.createElement('TR');
+                data_reference.setAttribute('name','data-reference');
+                    let title = document.createElement('TD');
+                        title.setAttribute('taskID',data._id);
+                        title.setAttribute('name','title');
+                        // title.innerHTML = data.title;
+                    data_reference.appendChild(title);
+                    let description = document.createElement('TD');
+                        description.classList.add('description');
+                        description.setAttribute('name','description');
+                        // description.innerHTML = data.description;
+                    data_reference.appendChild(description);
+                    let created_at = document.createElement('TD');
+                        created_at.setAttribute('name','created_at');
+                        // created_at.innerHTML = data.created_at;
+                    data_reference.appendChild(created_at);
+                    let due_date = document.createElement('TD');
+                        due_date.setAttribute('name','due_date');
+                        // due_date.innerHTML = data.due_date;
+                    data_reference.appendChild(due_date);    
+                    let completed = document.createElement('TD');
+                        completed.classList.add(data.class)
+                        let span =  document.createElement('SPAN');
+                            span.setAttribute('name','completed');
+                            // span.innerHTML = data.completed;
+                        completed.appendChild(span);
+                    data_reference.appendChild(completed);
+                    let actions = document.createElement('TD');
+                        let container = document.createElement('DIV');
+                            container.classList.add('actions-container');
+                            let tick = document.createElement('DIV');
+                                tick.classList.add('tooltip-container');
+                                let tick_img = document.createElement('IMG');
+                                    tick_img.classList.add('action-img task-action');
+                                    tick_img.setAttribute('name','tick');
+                                    tick_img.setAttribute('src','/img/actions/tick.png');
+                                tick.appendChild(tick_img);
+                                let tick_tooltip = document.createElement('SPAN');    
+                                    tick_tooltip.classList.add('tooltip bottom');
+                                    tick_tooltip.innerHTML('Mark as completed');
+                                tick.appendChild(tick_tooltip);
+                            container.appendChild(tick);
+                            let edit = document.createElement('DIV');
+                                edit.classList.add('tooltip-container');
+                                let edit_img = document.createElement('IMG');
+                                    edit_img.classList.add('action-img task-action');
+                                    edit_img.setAttribute('name','edit');
+                                    edit_img.setAttribute('src','/img/actions/edit.png');
+                                edit.appendChild(edit_img);
+                                let edit_tooltip = document.createElement('SPAN');    
+                                    edit_tooltip.classList.add('tooltip bottom');
+                                    edit_tooltip.innerHTML('Edit');
+                                edit.appendChild(edit_tooltip);
+                            container.appendChild(edit);    
+                            let erase = document.createElement('DIV');
+                                erase.classList.add('tooltip-container');
+                                let erase_img = document.createElement('IMG');
+                                    erase_img.classList.add('action-img task-action');
+                                    erase_img.setAttribute('name','erase');
+                                    erase_img.setAttribute('src','/img/actions/erase.png');
+                                erase.appendChild(erase_img);
+                                let erase_tooltip = document.createElement('SPAN');    
+                                    erase_tooltip.classList.add('tooltip bottom');
+                                    erase_tooltip.innerHTML('Erase');
+                                erase.appendChild(erase_tooltip);
+                            container.appendChild(erase);  
+                        actions.appendChild(container);   
+                    data_reference.appendChild(actions);            
+                table.appendChild(data_reference);
+            }
+        }
+    );
+  </script> 
+
+<!-- <tr name="data-reference">
+    <td taskID={{this._id}} name="title">{{this.title}}</td>
+    <td class="description" name="description">{{this.description}}</td>
+    <td name="created_at">{{this.created_at}}</td>
+    <td name="due_date">{{this.due_date}}</td>
+    <td class={{this.class}}>
+    <span name="completed">{{this.completed}}</span> 
+    </td>
+    <td>
+    <div class="actions-container">
+        <div class="tooltip-container">
+            <img class="action-img task-action" name="tick" src="/img/actions/tick.png">
+            <span class="tooltip bottom">Mark as completed</span>
+        </div> 
+        <div class="tooltip-container" name="edit">
+            <img class="action-img task-action" name="edit" src="/img/actions/edit.png">
+            <span class="tooltip bottom">Edit</span>
+        </div> 
+        <div class="tooltip-container" name="erase">
+            <img class="action-img task-action" name="erase" src="/img/actions/erase.png"> 
+            <span class="tooltip bottom">Delete</span>
+        </div> 
+    </div>  
+    </td>
+</tr> -->

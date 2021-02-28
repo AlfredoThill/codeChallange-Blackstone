@@ -1,6 +1,5 @@
 const invokeClient = require('../utility/client');
 const query = require('../utility/query');
-const components = require('../utility/templating/components');
 const ObjectId = require('mongodb').ObjectID;
 // Requiring the model, dunno if im gonna use it yet
 const Task = require('../models/m-task');
@@ -12,12 +11,8 @@ exports.fetchTasks = async (req, res, next) => {
         const user = await query('users','find',{ '_id': new ObjectId(userID)});
         let html;
         // Check number of tasks
-        if (user[0].tasks.length == 0) {
-            // No tasks for this user yet
-            html = "<h3 style='text-align: center;'>You've got no tasks yet... add one!</h3>";
-        }
-        else {
-            // Prepare data set for template. (should be done with mongo aggregation, fix this!)
+        if (user[0].tasks.length != 0) {
+            // Prepare data set for component. (could be done with mongo aggregation)
             for (let i = 0; i < user[0].tasks.length; i++) {
                 if (user[0].tasks[i].completed == true) {
                     user[0].tasks[i].completed = 'Yes';
@@ -31,9 +26,8 @@ exports.fetchTasks = async (req, res, next) => {
                 user[0].tasks[i].created_at = (new Date(user[0].tasks[i].created_at)).toLocaleDateString('en-US');
                 user[0].tasks[i].due_date = (new Date(user[0].tasks[i].due_date)).toLocaleDateString('en-US');
             }
-            html = components.task_list({ list: user[0].tasks });
         }
-        res.send(html);
+        res.json(user[0].tasks);
     }
     catch (e) {
         console.log(e);

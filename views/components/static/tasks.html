@@ -1,15 +1,42 @@
-<div>
+<template id="tasks-template">
+    <!-- Style -->
+    <link rel='stylesheet' href='/css/sty-general.css'/>
+    <link rel='stylesheet' href='/css/sty-tasks.css'/>
+    <!-- Structure -->
     <section class="view" name="tasks">
         <h2>Manage your tasks</h2>
         <hr>
         <div class="table-container column">
             <button id="add-task" name="add">Add a Task</button>
-            <!-- To be loaded with ajax -->
             <div id="task-tables">
-                <h3 style="text-align: center;"></h3>
+                <h3 style="text-align: center;">Loading...</h3>
             </div>
         </div>
         <hr>
-        <script src="/js/dom-task.js" defer></script>   
     </section>
-</div>  
+</template>
+<script>
+    customElements.define('x-tasks',
+        class extends HTMLElement {
+            constructor() {
+            super();
+            let template = document.getElementById('tasks-template');
+            let templateContent = template.content;        
+            const shadowRoot = this.attachShadow({mode: 'open'})
+                .appendChild(templateContent.cloneNode(true));
+            }
+            connectedCallback() {
+                console.log('Tasks component loaded!');
+                app_stateProxy.main_content = this.nodeName.toLowerCase();
+                // Load task-list component
+                const task_component = document.querySelector('x-tasks');
+                const tasts_container = task_component.shadowRoot.getElementById('task-tables');
+                let old_content = tasts_container.firstElementChild;
+                let new_content= document.createElement('x-task_list');
+                old_content.replaceWith(new_content);
+                // Get current_user tasks
+                push_taskList();
+            }
+        }
+    );
+  </script> 

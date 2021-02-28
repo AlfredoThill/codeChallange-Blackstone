@@ -1,27 +1,27 @@
 //1. ### Populate 'tasks-list' ###
-//   Straight forward xhr call, then push html into div
+//   Straight forward xhr call, get json with user's tasks
 function push_taskList() {
     const call = "/task/list";
     taskList = makeAjaxCall(call,"GET");
     taskList.then( (resp) => {
-        document.getElementById('task-tables').innerHTML = resp;
-        // Assing actions on table buttons
-        setTasks_inTable();
+      let task_component = document.querySelector('x-tasks');
+      if (task_component != null) {
+        let taskList_component = task_component.shadowRoot.querySelector('x-task_list');
+        taskList_component.setAttribute('data-set',resp);
+      } 
     })
     taskList.catch( (e) => {
         pushError(e);
     })
     return taskList;
 }
-// Call 'pushComments' inmediately
-let push_tasks = push_taskList();
 
-//2. ### Set actions ###
-const add_button = document.getElementById("add-task");
+// //2. ### Set actions ###
+// const add_button = document.getElementById("add-task");
 
-// Since there's only 1 of these and it's outside the component 
-// let's just assing the event
-add_button.addEventListener('click', setTaskAction.bind(add_button) );
+// // Since there's only 1 of these and it's outside the component 
+// // let's just assing the event
+// add_button.addEventListener('click', setTaskAction.bind(add_button) );
 
 // There are many of these and they are loaded along side the
 // component, 'tasks-list', so we gotta refresh these listeners

@@ -23,4 +23,5 @@ function loadComponent(file) {
       component.catch( (e) => {
         console.log(e);
       })
+      return component;
 }

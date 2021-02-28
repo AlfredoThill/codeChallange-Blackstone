@@ -1,22 +1,40 @@
-
-<section class="view" name="about">
-    <h2>About this app</h2><hr>
-          <p>
-           This repo contains a minimal app as requested in a job interview by 'Blackstone'.
-           <br><br>
-            <b>- Regarding the app: </b>I tried to follow a MVC pattern using Mongo Atlas as DB, express as web framework
-            and plain html/css/js on frontside. The 'code challange' requested some frontend framework, like react,
-            but i've just started learning it. So, since I'm not comfortable with react yet I went with plain code on front,
-            I hope that's ok. Anyhow, I'm eager to learn react and pretty much anything! I'm working with Laravel at the
-            moment, taught me a lot, but I like node very much and I wanna dive deep into it. The repo is on github and
-            it's deployed using heroku.
-          <br><br>
-            <b>- Regarding testing: </b> as requested by the 'code challange' testing has been set in place using mocha/chai. In order
-            to run the tests a '.env' file will be provided with testing credentials, place it on the root folder. Then run the tests, 'npm test'. Note: So far I haven't 
-            been able to mock session variables in my tests, im ussing 'express-session', so you'll see 3 skipped tests regarding 
-            the 'Task' controller. I did come up with some alternatives, like using a custom middleware for these routes,
-            rewriting the backend logic or changing the session package but I felt any of these would defeat the purpose.
-          <br><br>
-           Thank you for reading!
-          </p>
-</section>
+<template id="about-template">
+  <section class="view" name="about">
+      <h2>About this app</h2><hr>
+            <p>
+            This repo contains a minimal app as requested in a job interview by 'Blackstone'.
+            <br><br>
+              <b>- Regarding the app: </b>I tried to follow a MVC pattern using Mongo Atlas as DB, express as web framework
+              and plain html/css/js on frontside. The 'code challange' requested some frontend framework, like react,
+              but i've just started learning it. So, since I'm not comfortable with react yet I went with plain code on front,
+              I hope that's ok. Anyhow, I'm eager to learn react and pretty much anything! I'm working with Laravel at the
+              moment, taught me a lot, but I like node very much and I wanna dive deep into it. The repo is on github and
+              it's deployed using heroku.
+            <br><br>
+              <b>- Regarding testing: </b> as requested by the 'code challange' testing has been set in place using mocha/chai. In order
+              to run the tests a '.env' file will be provided with testing credentials, place it on the root folder. Then run the tests, 'npm test'. Note: So far I haven't 
+              been able to mock session variables in my tests, im ussing 'express-session', so you'll see 3 skipped tests regarding 
+              the 'Task' controller. I did come up with some alternatives, like using a custom middleware for these routes,
+              rewriting the backend logic or changing the session package but I felt any of these would defeat the purpose.
+            <br><br>
+            Thank you for reading!
+            </p>
+  </section>
+</template>  
+<script>
+  customElements.define('x-about',
+      class extends HTMLElement {
+          constructor() {
+          super();
+          let template = document.getElementById('about-template');
+          let templateContent = template.content;        
+          const shadowRoot = this.attachShadow({mode: 'open'})
+              .appendChild(templateContent.cloneNode(true));
+          }
+          connectedCallback() {
+                console.log('About component loaded!');
+                app_stateProxy.main_content = this.nodeName.toLowerCase();
+          }
+      }
+  );
+</script> 

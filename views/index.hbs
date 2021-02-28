@@ -5,25 +5,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel='stylesheet' href='/css/sty-general.css'/>
+    <link rel='stylesheet' href='/css/sty-dashboard.css'/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/js/helpers/ajax-helper.js"></script>
+    <script src="/js/helpers/prepare-form.js"></script>
     <script src="/js/helpers/component-loader.js"></script>
     <script>
-        loadComponent('static/menu.html');
-        loadComponent('dinamic/home.html');
-        loadComponent('static/footer.html');
+        let loadHome = loadComponent('static/home.html');
+        let loadAbout = loadComponent('static/about.html');
+        let loadTasks = loadComponent('static/tasks.html');
+        let loadTask_list = loadComponent('dinamic/task-list.html');
     </script>
   </head>
 
    <body id='layout-body'>
-    <x-menu></x-menu> 
-      <x-home>
-        <span slot="title">Welcome to the Task Manager</span>
-      </x-home>
-    <x-footer></x-footer>
+    {{> menu }}
+    {{> dashboard }}
+      <main>
+        <x-home>
+          <span slot="title">Welcome to the Task Manager</span>
+        </x-home>
+      </main>  
+    {{> footer }}
    </body>
-   <script src="/js/helpers/prepare-form.js"></script>
-   {{!-- <script src="/js/dom-user.js"></script> --}}
-   {{!-- <script src="/js/dom-dashboard.js"></script> --}}
-   {{!-- <script src="/js/dom-main.js"></script>    --}}
+
+   <script src="/js/dom-user.js"></script>
+   <script src="/js/dom-dashboard.js"></script>
+   <script src="/js/dom-main.js"></script>    
+   <script src="/js/dom-task.js"></script> 
 </html>
